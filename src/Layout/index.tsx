@@ -1,19 +1,21 @@
 import { ReactNode } from "react";
-import { Container, CssBaseline, Grid } from "@mui/material";
+import { CssBaseline, Grid } from "@mui/material";
 import Header from "./Header";
 import { Footer } from "./Footer";
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <Grid container direction="column" height="100vh">
+    <Grid container direction="column" minHeight="100vh">
       <CssBaseline />
       <Grid item>
         <Header />
       </Grid>
-      <Grid item xs>
-        <Container>{children}</Container>
+      <Grid item container justifyContent="center" alignItems="center" xs>
+        <Grid item>{children}</Grid>
       </Grid>
-      <Footer />
+      <Grid item>
+        <Footer />
+      </Grid>
     </Grid>
   );
 }
