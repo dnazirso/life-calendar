@@ -12,6 +12,7 @@ interface ISignInContextValues {
 
 interface ISignInContext extends ISignInContextValues {
   setUser: (username: User) => void;
+  logout: () => void;
   getContextFromLocalStorage: () => void;
 }
 
@@ -30,13 +31,19 @@ const initialValue: ISignInContextValues = {
 const initialContext: ISignInContext = {
   ...initialValue,
   setUser: (username: User) => {},
+  logout: () => {},
   getContextFromLocalStorage: () => {},
 };
 
 function SignInActions(app: Component<Props, ISignInContext>): ISignInContext {
   function setUser(user: User) {
     app.setState({ user });
-    persistContext(app.state);
+    persistContext({ ...app.state, user });
+  }
+
+  function logout() {
+    app.setState({ user: initialContext.user });
+    persistContext({ ...initialContext });
   }
 
   function persistContext(partialContext: Partial<ISignInContext>) {
@@ -55,6 +62,7 @@ function SignInActions(app: Component<Props, ISignInContext>): ISignInContext {
   return {
     ...initialValue,
     setUser,
+    logout,
     getContextFromLocalStorage,
   };
 }
