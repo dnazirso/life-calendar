@@ -11,7 +11,7 @@ export default function Login() {
   useEffect(() => {
     if (
       new Date(context.user.birthdate).toLocaleDateString() !==
-      new Date().toLocaleDateString()
+      new Date("00/00/00").toLocaleDateString()
     ) {
       navigate("/years");
     }
@@ -24,12 +24,11 @@ export default function Login() {
 
   const [user, setUser] = useState<User>({
     name: "",
-    birthdate: new Date(),
+    birthdate: new Date("00/00/00").getUTCDate(),
   });
 
   const cantContinue =
-    user.name.length > 0 &&
-    user.birthdate.toLocaleDateString() !== new Date().toLocaleDateString();
+    user.name.length > 0 && user.birthdate !== new Date().getUTCDate();
 
   return (
     <Layout>
@@ -52,7 +51,10 @@ export default function Login() {
             shrink: true,
           }}
           onChange={(e) => {
-            setUser({ ...user, birthdate: new Date(e.target.value) });
+            setUser({
+              ...user,
+              birthdate: new Date(e.target.value).getUTCDate(),
+            });
           }}
         />
         <Button

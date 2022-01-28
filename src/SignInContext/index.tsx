@@ -2,7 +2,7 @@ import { Component, createContext, ReactNode } from "react";
 
 export interface User {
   name: string;
-  birthdate: Date;
+  birthdate: number;
 }
 
 interface ISignInContextValues {
@@ -24,7 +24,7 @@ const initialValue: ISignInContextValues = {
   status: "idle",
   user: {
     name: "",
-    birthdate: new Date(),
+    birthdate: new Date("00/00/00").getUTCDate(),
   },
 };
 
