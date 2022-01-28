@@ -1,8 +1,7 @@
 import { Component, createContext, ReactNode } from "react";
 
-interface User {
+export interface User {
   name: string;
-  email: string;
   birthdate: Date;
 }
 
@@ -24,7 +23,6 @@ const initialValue: ISignInContextValues = {
   status: "idle",
   user: {
     name: "",
-    email: "",
     birthdate: new Date(),
   },
 };
@@ -36,9 +34,9 @@ const initialContext: ISignInContext = {
 };
 
 function SignInActions(app: Component<Props, ISignInContext>): ISignInContext {
-  function setUser() {
-    app.setState({ ...initialValue });
-    persistContext(initialValue);
+  function setUser(user: User) {
+    app.setState({ user });
+    persistContext(app.state);
   }
 
   function persistContext(partialContext: Partial<ISignInContext>) {
