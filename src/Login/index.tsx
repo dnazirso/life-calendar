@@ -1,7 +1,13 @@
 import { Button, Stack, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 
 export default function Login() {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/years");
+  };
+
   return (
     <Layout>
       <Stack component="form" noValidate spacing={3}>
@@ -28,7 +34,7 @@ export default function Login() {
             shrink: true,
           }}
         />
-        <Button variant="outlined" sx={{ py: 1.75 }}>
+        <Button onClick={handleLogin} variant="outlined" sx={{ py: 1.75 }}>
           Login
         </Button>
       </Stack>
