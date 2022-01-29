@@ -35,8 +35,6 @@ export default function Weeks() {
                 overflow: "auto",
                 flex: 1,
                 display: "grid",
-                columnGap: 0.15,
-                rowGap: 0.15,
                 gridTemplateColumns: "repeat(52, 1fr)",
               }}
             >
