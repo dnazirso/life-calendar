@@ -3,15 +3,18 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import SignInContext, { User } from "../SignInContext";
+import { useAppDispatch } from "../Store";
+import { setYears } from "../Store/yearsSlice";
 
 export default function Login() {
   const navigate = useNavigate();
   const context = useContext(SignInContext);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (
       new Date(context.user.birthdate).toLocaleDateString() !==
-      new Date("00/00/00").toLocaleDateString()
+      new Date("10/10/1910").toLocaleDateString()
     ) {
       navigate("/years");
     }
@@ -19,16 +22,17 @@ export default function Login() {
 
   const handleLogin = () => {
     context.setUser(user);
+    dispatch(setYears({ birthdate: user.birthdate }));
     navigate("/years");
   };
 
   const [user, setUser] = useState<User>({
     name: "",
-    birthdate: new Date("00/00/00").getUTCDate(),
+    birthdate: new Date("10/10/1910").getTime(),
   });
 
-  const cantContinue =
-    user.name.length > 0 && user.birthdate !== new Date().getUTCDate();
+  const canContinue =
+    user.name.length > 0 && user.birthdate !== new Date("10/10/1910").getTime();
 
   return (
     <Layout>
@@ -53,12 +57,12 @@ export default function Login() {
           onChange={(e) => {
             setUser({
               ...user,
-              birthdate: new Date(e.target.value).getUTCDate(),
+              birthdate: new Date(e.target.value).getTime(),
             });
           }}
         />
         <Button
-          disabled={!cantContinue}
+          disabled={!canContinue}
           onClick={handleLogin}
           variant="outlined"
           sx={{ py: 1.75 }}
