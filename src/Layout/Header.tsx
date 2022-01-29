@@ -10,7 +10,13 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SignInContext from "../SignInContext";
 
-export default function Header({ signed }: { signed: boolean }) {
+export default function Header({
+  signed,
+  title,
+}: {
+  signed: boolean;
+  title?: string;
+}) {
   const navigate = useNavigate();
   const context = useContext(SignInContext);
   const handleLogout = () => {
@@ -22,7 +28,7 @@ export default function Header({ signed }: { signed: boolean }) {
       <Container>
         <Toolbar disableGutters>
           <Typography component="div" variant="h5" sx={{ flexGrow: 1 }} px={2}>
-            Life Calendar
+            {title || "Life Calendar"}
           </Typography>
           <IconButton
             size="large"

@@ -4,18 +4,22 @@ import Header from "./Header";
 import { Footer } from "./Footer";
 import SignInContext from "../SignInContext";
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title?: string;
+}) {
   const context = useContext(SignInContext);
 
-  const signed =
-    new Date(context.user.birthdate).toLocaleDateString() !==
-    new Date().toLocaleDateString();
+  const signed = context.user.birthdate !== new Date("10/10/1910").getTime();
 
   return (
     <Grid container direction="column" minHeight="100vh">
       <CssBaseline />
       <Grid item>
-        <Header signed={signed} />
+        <Header title={title} signed={signed} />
       </Grid>
       <Grid item container justifyContent="center" alignItems="center" xs>
         <Grid item>{children}</Grid>

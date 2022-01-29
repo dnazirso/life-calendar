@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import SignInContext, { User } from "../SignInContext";
 import { useAppDispatch } from "../Store";
+import { setWeeks } from "../Store/weeksSlice";
 import { setYears } from "../Store/yearsSlice";
 
 export default function Login() {
@@ -23,6 +24,7 @@ export default function Login() {
   const handleLogin = () => {
     context.setUser(user);
     dispatch(setYears({ birthdate: user.birthdate }));
+    dispatch(setWeeks({ birthdate: user.birthdate }));
     navigate("/years");
   };
 
