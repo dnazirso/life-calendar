@@ -24,7 +24,7 @@ const initialValue: ISignInContextValues = {
   status: "idle",
   user: {
     name: "",
-    birthdate: new Date("00/00/00").getUTCDate(),
+    birthdate: new Date("10/10/1910").getTime(),
   },
 };
 

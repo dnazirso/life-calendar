@@ -1,10 +1,19 @@
 import { Button } from "@mui/material";
-import { ReactNode } from "react";
+import { Year } from "../Store/yearsSlice";
 
-export default function Age({ children }: { children?: ReactNode }) {
+export default function Age({ year }: { year: Year }) {
   return (
     <Button
-      variant="outlined"
+      variant={
+        new Date(year.date).getFullYear() > new Date().getFullYear()
+          ? "outlined"
+          : "contained"
+      }
+      color={
+        new Date(year.date).getFullYear() !== new Date().getFullYear()
+          ? "primary"
+          : "success"
+      }
       sx={{
         p: 1,
         textAlign: "center",
@@ -13,7 +22,7 @@ export default function Age({ children }: { children?: ReactNode }) {
         minWidth: 40,
       }}
     >
-      {children}
+      {year.age}
     </Button>
   );
 }

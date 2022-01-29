@@ -33,7 +33,7 @@ const yearsSlice = createSlice({
     },
     setYears: (state, { payload }: { payload: { birthdate: number } }) => {
       state.birthdate = payload.birthdate;
-      state.years = Array.from({ length: 90 }, (_, i) => i + 1).map((age) => ({
+      state.years = Array.from({ length: 90 }, (_, i) => i).map((age) => ({
         age,
         date: new Date(payload.birthdate).setFullYear(
           new Date(payload.birthdate).getFullYear() + age
@@ -45,6 +45,6 @@ const yearsSlice = createSlice({
   },
 });
 
-export const { setYear } = yearsSlice.actions;
+export const { setYear, setYears } = yearsSlice.actions;
 
 export default yearsSlice.reducer;
