@@ -1,4 +1,4 @@
-import { Container, Grid, Box, Paper } from "@mui/material";
+import { Container, Box, Paper } from "@mui/material";
 import Layout from "../Layout";
 import { useAppSelector } from "../Store";
 import Days from "./Days";
