@@ -1,9 +1,15 @@
 import { useState } from "react";
-import { Restore, Favorite, LocationOn } from "@mui/icons-material";
+import {
+  CalendarViewWeek,
+  CalendarToday,
+  PermContactCalendar,
+} from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export function Footer() {
   const [page, setPage] = useState(0);
+  const navigate = useNavigate();
   return (
     <Grid item>
       <BottomNavigation
@@ -13,9 +19,21 @@ export function Footer() {
           setPage(newValue);
         }}
       >
-        <BottomNavigationAction label="Recents" icon={<Restore />} />
-        <BottomNavigationAction label="Favorites" icon={<Favorite />} />
-        <BottomNavigationAction label="Nearby" icon={<LocationOn />} />
+        <BottomNavigationAction
+          onClick={() => navigate("/years")}
+          label="Years"
+          icon={<PermContactCalendar />}
+        />
+        <BottomNavigationAction
+          onClick={() => navigate("/weeks")}
+          label="Weeks"
+          icon={<CalendarViewWeek />}
+        />
+        <BottomNavigationAction
+          onClick={() => navigate("/today")}
+          label="Today"
+          icon={<CalendarToday />}
+        />
       </BottomNavigation>
     </Grid>
   );
