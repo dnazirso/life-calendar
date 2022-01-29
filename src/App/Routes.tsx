@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import Login from "../Login";
+import Today from "../Today";
 import Weeks from "../Weeks";
 import Years from "../Years";
 
@@ -16,6 +17,10 @@ export default function Routes() {
     {
       path: "/weeks",
       element: <Weeks />,
+    },
+    {
+      path: "/today",
+      element: <Today />,
     },
   ]);
   return routes;
