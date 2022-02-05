@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 import Header from "./Header";
-import { Footer } from "./Footer";
+import Footer from "./Footer";
 import SignInContext from "../SignInContext";
 
 export default function Layout({
@@ -24,7 +24,9 @@ export default function Layout({
       <Grid item container justifyContent="center" alignItems="center" xs>
         <Grid item>{children}</Grid>
       </Grid>
-      <Grid item>{signed && <Footer />}</Grid>
+      <Grid item>
+        <Footer signed={signed} />
+      </Grid>
     </Grid>
   );
 }

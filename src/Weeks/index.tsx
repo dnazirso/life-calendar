@@ -1,5 +1,4 @@
 import { Container, Box, Paper } from "@mui/material";
-import Layout from "../Layout";
 import { useAppSelector } from "../Store";
 import Days from "./Days";
 
@@ -7,44 +6,42 @@ export default function Weeks() {
   const { weeks } = useAppSelector((state) => state.weeks);
 
   return (
-    <Layout title="Your life in weeks">
-      <Container>
-        <Paper
+    <Container>
+      <Paper
+        sx={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "column",
+          height: 650,
+          overflow: "hidden",
+        }}
+      >
+        <Box
           sx={{
             display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            height: 650,
             overflow: "hidden",
+            flex: 1,
+            position: "relative",
+            height: "100%",
+            flexDirection: "column",
           }}
         >
           <Box
+            justifyContent="space-evenly"
+            maxWidth={420}
             sx={{
-              display: "flex",
-              overflow: "hidden",
+              overflow: "auto",
               flex: 1,
-              position: "relative",
-              height: "100%",
-              flexDirection: "column",
+              display: "grid",
+              gridTemplateColumns: "repeat(52, 1fr)",
             }}
           >
-            <Box
-              justifyContent="space-evenly"
-              maxWidth={420}
-              sx={{
-                overflow: "auto",
-                flex: 1,
-                display: "grid",
-                gridTemplateColumns: "repeat(52, 1fr)",
-              }}
-            >
-              {weeks.map((week) => (
-                <Days key={week.id} week={week} />
-              ))}
-            </Box>
+            {weeks.map((week) => (
+              <Days key={week.id} week={week} />
+            ))}
           </Box>
-        </Paper>
-      </Container>
-    </Layout>
+        </Box>
+      </Paper>
+    </Container>
   );
 }

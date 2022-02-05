@@ -4,37 +4,44 @@ import {
   CalendarToday,
   PermContactCalendar,
 } from "@mui/icons-material";
-import { BottomNavigation, BottomNavigationAction, Grid } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export function Footer() {
-  const [page, setPage] = useState(0);
+export default function Footer({ signed }: { signed: boolean }) {
+  const [page, setPage] = useState("/years");
   const navigate = useNavigate();
+
+  const handleChange = (
+    _: React.SyntheticEvent<Element, Event>,
+    name: string
+  ) => {
+    setPage(name);
+    navigate(name);
+  };
+
   return (
-    <Grid item>
-      <BottomNavigation
-        showLabels
-        value={page}
-        onChange={(event, newValue) => {
-          setPage(newValue);
-        }}
-      >
-        <BottomNavigationAction
-          onClick={() => navigate("/years")}
-          label="Years"
-          icon={<PermContactCalendar />}
-        />
-        <BottomNavigationAction
-          onClick={() => navigate("/weeks")}
-          label="Weeks"
-          icon={<CalendarViewWeek />}
-        />
-        <BottomNavigationAction
-          onClick={() => navigate("/today")}
-          label="Today"
-          icon={<CalendarToday />}
-        />
-      </BottomNavigation>
-    </Grid>
+    <Box
+      component={BottomNavigation}
+      showLabels
+      value={page}
+      onChange={handleChange}
+      display={signed ? "flex" : "none"}
+    >
+      <BottomNavigationAction
+        label="Years"
+        value="/years"
+        icon={<PermContactCalendar />}
+      />
+      <BottomNavigationAction
+        label="Weeks"
+        value="/weeks"
+        icon={<CalendarViewWeek />}
+      />
+      <BottomNavigationAction
+        label="Today"
+        value="/today"
+        icon={<CalendarToday />}
+      />
+    </Box>
   );
 }
