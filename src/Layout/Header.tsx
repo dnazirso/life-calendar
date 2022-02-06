@@ -9,20 +9,21 @@ import {
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SignInContext from "../SignInContext";
+import { useAppDispatch, useAppSelector } from "../Store";
+import { setPage } from "../Store/appSlice";
 
-export default function Header({
-  signed,
-  title,
-}: {
-  signed: boolean;
-  title?: string;
-}) {
+export default function Header({ signed }: { signed: boolean }) {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const context = useContext(SignInContext);
+  const { title } = useAppSelector((state) => state.app);
+
   const handleLogout = () => {
     context.logout();
+    dispatch(setPage("/"));
     navigate("/");
   };
+
   return (
     <AppBar position="sticky">
       <Container>

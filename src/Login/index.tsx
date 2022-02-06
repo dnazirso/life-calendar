@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SignInContext, { User } from "../SignInContext";
 import { useAppDispatch } from "../Store";
+import { setPage } from "../Store/appSlice";
 import { setWeeks } from "../Store/weeksSlice";
 import { setYears } from "../Store/yearsSlice";
 
@@ -24,6 +25,7 @@ export default function Login() {
     context.setUser(user);
     dispatch(setYears({ birthdate: user.birthdate }));
     dispatch(setWeeks({ birthdate: user.birthdate }));
+    dispatch(setPage("/years"));
     navigate("/years");
   };
 

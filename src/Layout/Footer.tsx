@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   CalendarViewWeek,
   CalendarToday,
@@ -6,16 +5,20 @@ import {
 } from "@mui/icons-material";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Page, setPage } from "../Store/appSlice";
+import { useAppSelector } from "../Store";
 
 export default function Footer({ signed }: { signed: boolean }) {
-  const [page, setPage] = useState("/years");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { page } = useAppSelector((state) => state.app);
 
   const handleChange = (
     _: React.SyntheticEvent<Element, Event>,
-    name: string
+    name: Page
   ) => {
-    setPage(name);
+    dispatch(setPage(name));
     navigate(name);
   };
 

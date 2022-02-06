@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import appSlice from "./appSlice";
 import weeksSlice from "./weeksSlice";
 import yearsSlice from "./yearsSlice";
 
 export const store = configureStore({
   reducer: {
+    app: appSlice,
     years: yearsSlice,
     weeks: weeksSlice,
   },
